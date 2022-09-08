@@ -3,7 +3,7 @@ import { MOON, SUN } from './const'
 
 export function App() {
     let [theme, setTheme] = useState(
-        localStorage?.theme === 'dark' ? 'dark' : 'light'
+        localStorage?.theme ? localStorage.theme : 'dark'
     )
 
     document.querySelector('html')!.className = theme
@@ -27,9 +27,10 @@ export function App() {
         }
     }
 
+    const rows = ['a', 'b', 'c']
+    const cols = [1, 2, 3]
+
     let clearBoard = () => {
-        let rows = ['a', 'b', 'c']
-        let cols = [1, 2, 3]
         rows.forEach((row) => {
             cols.forEach((col) => {
                 document.querySelector(`#${row}${col}`)!.innerHTML = ''
@@ -47,9 +48,9 @@ export function App() {
                     </span>
                 </div>
                 <div className='col self-center'>
-                    {['a', 'b', 'c'].map((row, rowNum) => (
+                    {rows.map((row, rowNum) => (
                         <div className='row' key={rowNum}>
-                            {[1, 2, 3].map((col, colNum) => (
+                            {cols.map((col, colNum) => (
                                 <div
                                     className='cell'
                                     key={colNum}
