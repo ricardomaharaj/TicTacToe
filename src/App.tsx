@@ -1,87 +1,72 @@
 import { useState } from 'react'
+import { MOON, SUN } from './const'
 
 export function App() {
+    let [theme, setTheme] = useState(
+        localStorage?.theme === 'dark' ? 'dark' : 'light'
+    )
+
+    document.querySelector('html')!.className = theme
+
     let [player, setPlayer] = useState('X')
 
-    let handleClick = (id: any) => {
-        document.querySelector<HTMLDivElement>(`#${id}`)!.innerHTML = player
-        setPlayer(player === 'X' ? 'O' : 'X')
+    let toggleTheme = () => {
+        let newTheme = theme === 'dark' ? 'light' : 'dark'
+        localStorage.setItem('theme', newTheme)
+        document.querySelector('html')?.setAttribute('class', newTheme)
+        setTheme(newTheme)
+    }
+
+    let onPlay = (id: string) => {
+        let cell = document.querySelector<HTMLDivElement>(`#${id}`)!
+        if (cell.innerHTML) {
+            return
+        } else {
+            cell.innerHTML = player
+            setPlayer(player === 'X' ? 'O' : 'X')
+        }
+    }
+
+    let clearBoard = () => {
+        let rows = ['a', 'b', 'c']
+        let cols = [1, 2, 3]
+        rows.forEach((row) => {
+            cols.forEach((col) => {
+                document.querySelector(`#${row}${col}`)!.innerHTML = ''
+            })
+        })
     }
 
     return (
         <div className='container mx-auto'>
-            <div className='row m-4 justify-center'>
-                <span className='text-xl'>Tic Tac Toe</span>
-            </div>
-            <div className='row justify-center'>
-                <div className='col'>
-                    <div
-                        className='cell'
-                        id='a1'
-                        onClick={() => {
-                            handleClick('a1')
-                        }}
-                    ></div>
-                    <div
-                        className='cell'
-                        id='b1'
-                        onClick={() => {
-                            handleClick('b1')
-                        }}
-                    ></div>
-                    <div
-                        className='cell'
-                        id='c1'
-                        onClick={() => {
-                            handleClick('c1')
-                        }}
-                    ></div>
+            <div className='col'>
+                <div className='row m-4 justify-center'>
+                    <span className='text-xl'>Tic Tac Toe</span>
+                    <span className='mx-2' onClick={() => toggleTheme()}>
+                        {theme === 'dark' ? SUN : MOON}
+                    </span>
                 </div>
-                <div className='col'>
-                    <div
-                        className='cell'
-                        id='a2'
-                        onClick={() => {
-                            handleClick('a2')
-                        }}
-                    ></div>
-                    <div
-                        className='cell'
-                        id='b2'
-                        onClick={() => {
-                            handleClick('b2')
-                        }}
-                    ></div>
-                    <div
-                        className='cell'
-                        id='c2'
-                        onClick={() => {
-                            handleClick('c2')
-                        }}
-                    ></div>
+                <div className='col self-center'>
+                    {['a', 'b', 'c'].map((row, rowNum) => (
+                        <div className='row' key={rowNum}>
+                            {[1, 2, 3].map((col, colNum) => (
+                                <div
+                                    className='cell'
+                                    key={colNum}
+                                    id={`${row}${col}`}
+                                    onClick={() => onPlay(`${row}${col}`)}
+                                ></div>
+                            ))}
+                        </div>
+                    ))}
                 </div>
-                <div className='col'>
-                    <div
-                        className='cell'
-                        id='a3'
-                        onClick={() => {
-                            handleClick('a3')
-                        }}
-                    ></div>
-                    <div
-                        className='cell'
-                        id='b3'
-                        onClick={() => {
-                            handleClick('b3')
-                        }}
-                    ></div>
-                    <div
-                        className='cell'
-                        id='c3'
-                        onClick={() => {
-                            handleClick('c3')
-                        }}
-                    ></div>
+                <div className='row justify-center m-2'>
+                    <button
+                        className='bg2 rounded-xl p-2'
+                        onClick={() => clearBoard()}
+                    >
+                        CLEAR BOARD
+                    </button>
                 </div>
             </div>
         </div>
