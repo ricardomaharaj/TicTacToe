@@ -30,12 +30,15 @@ export function App() {
     const rows = ['a', 'b', 'c']
     const cols = [1, 2, 3]
 
+    let [clearBoardClicked, setClearBoardClicked] = useState(false)
+
     let clearBoard = () => {
         rows.forEach((row) => {
             cols.forEach((col) => {
                 document.querySelector(`#${row}${col}`)!.innerHTML = ''
             })
         })
+        setClearBoardClicked(false)
     }
 
     return (
@@ -61,13 +64,39 @@ export function App() {
                         </div>
                     ))}
                 </div>
-                <div className='row justify-center m-2'>
-                    <button
-                        className='bg2 rounded-xl p-2'
-                        onClick={() => clearBoard()}
-                    >
-                        CLEAR BOARD
-                    </button>
+                <div className='col self-center m-2'>
+                    {clearBoardClicked ? (
+                        <div className='col space-y-2'>
+                            <div className='row justify-center'>
+                                <span className='bg3 p-2 rounded-xl'>
+                                    Clear Board?
+                                </span>
+                            </div>
+                            <div className='row justify-center space-x-2'>
+                                <span
+                                    className='warn p-2 rounded-xl'
+                                    onClick={() => clearBoard()}
+                                >
+                                    CLEAR
+                                </span>
+                                <span
+                                    className='bg2 p-2 rounded-xl'
+                                    onClick={() => setClearBoardClicked(false)}
+                                >
+                                    CANCEL
+                                </span>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className='row justify-center'>
+                            <span
+                                className='bg2 p-2 rounded-xl'
+                                onClick={() => setClearBoardClicked(true)}
+                            >
+                                CLEAR BOARD
+                            </span>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

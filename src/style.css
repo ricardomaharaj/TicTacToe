@@ -10,6 +10,10 @@ body {
     @apply bg-slate-300 dark:bg-slate-800;
 }
 
+.bg3 {
+    @apply bg-slate-400 dark:bg-slate-700;
+}
+
 .col {
     @apply flex flex-col;
 }
@@ -20,4 +24,8 @@ body {
 
 .cell {
     @apply w-20 h-20 text-7xl text-center border border-black dark:border-white;
+}
+
+.warn {
+    @apply bg-red-300 dark:bg-red-800;
 }
