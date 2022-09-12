@@ -2,11 +2,11 @@
     "name": "tic-tac-toe",
     "version": "0",
     "scripts": {
-        "start": "react-scripts start",
+        "dev": "react-scripts start",
         "build": "react-scripts build"
     },
     "dependencies": {
-        "autoprefixer": "10.4.8",
+        "autoprefixer": "10.4.9",
         "postcss": "8.4.16",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -27,7 +27,7 @@
         "workbox-streams": "6.5.4"
     },
     "devDependencies": {
-        "@types/node": "18.7.16",
+        "@types/node": "18.7.17",
         "@types/react": "18.0.19",
         "@types/react-dom": "18.0.6"
     },
