@@ -43,7 +43,7 @@ export function App() {
 
     return (
         <div className='container mx-auto'>
-            <div className='col'>
+            <div className='col space-y-2'>
                 <div className='row m-4 justify-center'>
                     <span className='text-xl'>Tic Tac Toe</span>
                     <span className='mx-2' onClick={() => toggleTheme()}>
@@ -64,30 +64,33 @@ export function App() {
                         </div>
                     ))}
                 </div>
-                <div className='col self-center m-2'>
-                    {clearBoardClicked ? (
-                        <div className='col space-y-2'>
-                            <div className='row justify-center'>
-                                <span className='bg3 p-2 rounded-xl'>
-                                    Clear Board?
-                                </span>
-                            </div>
-                            <div className='row justify-center space-x-2'>
-                                <span
-                                    className='warn p-2 rounded-xl'
-                                    onClick={() => clearBoard()}
-                                >
-                                    CLEAR
-                                </span>
-                                <span
-                                    className='bg2 p-2 rounded-xl'
-                                    onClick={() => setClearBoardClicked(false)}
-                                >
-                                    CANCEL
-                                </span>
-                            </div>
+                {clearBoardClicked ? (
+                    <>
+                        <div className='row justify-center'>
+                            <span className='bg3 p-2 rounded-xl'>
+                                Clear Board?
+                            </span>
                         </div>
-                    ) : (
+                        <div className='row justify-center space-x-2'>
+                            <span
+                                className='warn p-2 rounded-xl'
+                                onClick={() => clearBoard()}
+                            >
+                                CLEAR
+                            </span>
+                            <span
+                                className='bg2 p-2 rounded-xl'
+                                onClick={() => setClearBoardClicked(false)}
+                            >
+                                CANCEL
+                            </span>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className='row justify-center'>
+                            <span className='text-xl'>{player}'s turn</span>
+                        </div>
                         <div className='row justify-center'>
                             <span
                                 className='bg2 p-2 rounded-xl'
@@ -96,8 +99,8 @@ export function App() {
                                 CLEAR BOARD
                             </span>
                         </div>
-                    )}
-                </div>
+                    </>
+                )}
             </div>
         </div>
     )
