@@ -1,21 +1,7 @@
-import { useState } from 'react'
-import { MOON, SUN } from './const'
+import { useState } from 'preact/hooks'
 
 export function App() {
-    let [theme, setTheme] = useState(
-        localStorage?.theme ? localStorage.theme : 'dark'
-    )
-
-    document.querySelector('html')!.className = theme
-
     let [player, setPlayer] = useState('X')
-
-    let toggleTheme = () => {
-        let newTheme = theme === 'dark' ? 'light' : 'dark'
-        localStorage.setItem('theme', newTheme)
-        document.querySelector('html')?.setAttribute('class', newTheme)
-        setTheme(newTheme)
-    }
 
     let onPlay = (id: string) => {
         let cell = document.querySelector<HTMLDivElement>(`#${id}`)!
@@ -46,9 +32,6 @@ export function App() {
             <div className='col space-y-2'>
                 <div className='row m-4 justify-center'>
                     <span className='text-xl'>Tic Tac Toe</span>
-                    <span className='mx-2' onClick={() => toggleTheme()}>
-                        {theme === 'dark' ? SUN : MOON}
-                    </span>
                 </div>
                 <div className='col self-center'>
                     {rows.map((row, rowNum) => (
