@@ -66,13 +66,12 @@ export function App() {
                         {theme === Theme.Light && MOON}
                     </span>
                 </div>
-                <div className='col self-center'>
-                    {rows.map((row, rowNum) => (
-                        <div className='row' key={rowNum}>
-                            {cols.map((col, colNum) => (
+                <div class='col self-center'>
+                    {rows.map((row) => (
+                        <div class='row'>
+                            {cols.map((col) => (
                                 <div
-                                    className='cell'
-                                    key={colNum}
+                                    class='cell'
                                     id={`${row}${col}`}
                                     onClick={() => onPlay(`${row}${col}`)}
                                 ></div>
