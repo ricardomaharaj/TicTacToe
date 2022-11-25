@@ -1,7 +1,36 @@
 import { useState } from 'preact/hooks'
+import { SUN, MOON } from './consts'
+
+enum Theme {
+    Light = 'light',
+    Dark = 'dark'
+}
+
+function themeCheck() {
+    if (localStorage.theme) {
+        document.querySelector('html')!.className = localStorage.theme
+        return localStorage.theme
+    } else localStorage.theme = Theme.Dark
+    return Theme.Dark
+}
 
 export function App() {
     let [player, setPlayer] = useState('X')
+    let [theme, setTheme] = useState(themeCheck())
+
+    let toggleTheme = () => {
+        if (theme === Theme.Dark) {
+            setTheme(Theme.Light)
+            localStorage.theme = Theme.Light
+            document.querySelector('html')!.className = 'light'
+        }
+
+        if (theme === Theme.Light) {
+            setTheme(Theme.Dark)
+            localStorage.theme = Theme.Dark
+            document.querySelector('html')!.className = 'dark'
+        }
+    }
 
     let onPlay = (id: string) => {
         let cell = document.querySelector<HTMLDivElement>(`#${id}`)!
@@ -28,10 +57,14 @@ export function App() {
     }
 
     return (
-        <div className='container mx-auto'>
-            <div className='col space-y-2'>
-                <div className='row m-4 justify-center'>
-                    <span className='text-xl'>Tic Tac Toe</span>
+        <div class='container mx-auto'>
+            <div class='col space-y-2'>
+                <div class='row m-4 space-x-2 justify-center'>
+                    <span class='text-xl'>Tic Tac Toe</span>
+                    <span class='' onClick={toggleTheme}>
+                        {theme === Theme.Dark && SUN}
+                        {theme === Theme.Light && MOON}
+                    </span>
                 </div>
                 <div className='col self-center'>
                     {rows.map((row, rowNum) => (
