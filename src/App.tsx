@@ -82,38 +82,36 @@ export function App() {
                 </div>
                 {clearBoardClicked ? (
                     <>
-                        <div className='row justify-center'>
-                            <span className='bg3 p-2 rounded-xl'>
-                                Clear Board?
-                            </span>
+                        <div class='row justify-center'>
+                            <span class='bg3 p-2 rounded-xl'>Clear Board?</span>
                         </div>
-                        <div className='row justify-center space-x-2'>
-                            <span
-                                className='warn p-2 rounded-xl'
-                                onClick={() => clearBoard()}
-                            >
-                                CLEAR
-                            </span>
-                            <span
-                                className='bg2 p-2 rounded-xl'
+                        <div class='row justify-center space-x-2'>
+                            <button
+                                class='bg2 p-2 rounded-xl'
                                 onClick={() => setClearBoardClicked(false)}
                             >
                                 CANCEL
-                            </span>
+                            </button>
+                            <button
+                                class='warn p-2 rounded-xl'
+                                onClick={() => clearBoard()}
+                            >
+                                CLEAR
+                            </button>
                         </div>
                     </>
                 ) : (
                     <>
-                        <div className='row justify-center'>
-                            <span className='text-xl'>{player}'s turn</span>
+                        <div class='row justify-center'>
+                            <span class='text-xl'>{player}'s turn</span>
                         </div>
-                        <div className='row justify-center'>
-                            <span
-                                className='bg2 p-2 rounded-xl'
+                        <div class='row justify-center'>
+                            <button
+                                class='bg2 p-2 rounded-xl'
                                 onClick={() => setClearBoardClicked(true)}
                             >
                                 CLEAR BOARD
-                            </span>
+                            </button>
                         </div>
                     </>
                 )}
